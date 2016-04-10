@@ -1,5 +1,9 @@
 package tests;
 
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Test;
+import java.io.IOException;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -9,16 +13,20 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.AfterTest;
 
+import dataprovider.RunFrameworkConfigReader;
 import pages.Loginpage;
 import utilities.ReadExcelFile;
 
 public class TestLoginPage {
 	WebDriver driver;
-  @Test(dataProvider = "dp")
+	
+	RunFrameworkConfigReader readprop=new RunFrameworkConfigReader();
+	
+	@Test(dataProvider = "dp")
   public void loginTest(String uname, String pass) throws InterruptedException {
 	/*  Loginpage Log_in=PageFactory.initElements(driver, Loginpage.class);*/
-	  Loginpage Log_in=new Loginpage(driver);
 	  
+		Loginpage Log_in=new Loginpage(driver);
 	  Log_in.login(uname,pass);
 	  System.out.println(driver.getTitle());
 	  
@@ -32,7 +40,7 @@ public class TestLoginPage {
        { "b", "b" },
 
     };*/
- ReadExcelFile rd=new ReadExcelFile("D:\\SELENIUMproject\\Git\\ProjectAutomation\\ProjectAutomation\\TestData\\TestData.xlsx");
+ ReadExcelFile rd=new ReadExcelFile(readprop.testDatasheet());
  int rowno=rd.getRowcount(0);
     Object[][] data=new Object[rowno][2];
     for(int i=0;i<rowno;i++)
@@ -47,13 +55,15 @@ public class TestLoginPage {
     
   }
   @BeforeTest
-  public void beforeTest() {
-	  driver=new FirefoxDriver();
-	  driver.get("https://www.irctc.co.in");
-	  
+  public void beforeTest() throws IOException {
+	  /*driver=new FirefoxDriver();
+	  driver.get("https://www.irctc.co.in");*/
+	  readprop.RunFrameworkConfigReadermethod();
+	 driver= readprop.getBrowser();
   }
 
-  @AfterTest
+  @AfterMethod
+@AfterTest
   public void tearDown() {
 	  driver.quit();
   }

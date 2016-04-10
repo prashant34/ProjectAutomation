@@ -78,7 +78,7 @@ public class Bookingticket {
 	}*/
 	public void enterDate() throws InterruptedException
 	{
-		driver.findElement(date).sendKeys("23-3-2016");
+		driver.findElement(date).sendKeys("15-4-2016");
 		/*System.out.println("testing");
 		
 		WebDriverWait wait = new WebDriverWait(driver, 10);

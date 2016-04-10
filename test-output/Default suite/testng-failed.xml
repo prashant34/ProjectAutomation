@@ -5,15 +5,7 @@
     <classes>
       <class name="tests.TestSignUpPage">
         <methods>
-<<<<<<< HEAD
-<<<<<<< HEAD
           <include name="testregistration"/>
-=======
-          <include name="loginTest"/>
->>>>>>> refs/remotes/origin/master
-=======
-          <include name="loginTest"/>
->>>>>>> refs/remotes/origin/master
           <include name="beforeTest"/>
           <include name="userNameAvailability"/>
         </methods>

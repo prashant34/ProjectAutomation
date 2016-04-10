@@ -1,5 +1,6 @@
 package tests;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
@@ -7,6 +8,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeTest;
 
+import dataprovider.RunFrameworkConfigReader;
 import pages.Bookingticket;
 import pages.Loginpage;
 
@@ -14,6 +16,7 @@ public class TestBookingTicket {
 	WebDriver driver;
 	Bookingticket BT;
 	Loginpage Log_int;
+	RunFrameworkConfigReader readprop=new RunFrameworkConfigReader();
   @Test
   public void bookingTickettest() throws InterruptedException {
 	
@@ -38,10 +41,9 @@ public class TestBookingTicket {
 
   }
   @BeforeTest
-  public void beforeTest() {
-	  driver=new FirefoxDriver();
-	  driver.manage().window().maximize();
-	  driver.get("https://www.irctc.co.in");
+  public void beforeTest() throws IOException {
+	  readprop.RunFrameworkConfigReadermethod();
+	  driver=readprop.getBrowser();
 	  driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 	  Log_int=new Loginpage(driver);
 	  BT=new Bookingticket(driver);

@@ -3,6 +3,7 @@ package tests;
 import org.testng.annotations.Test;
 import org.testng.Assert;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -11,11 +12,13 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeTest;
 
+import dataprovider.RunFrameworkConfigReader;
 import pages.SignUpPage;
 
 public class TestSignUpPage {
 	WebDriver driver;
 	SignUpPage reg;
+	RunFrameworkConfigReader readprop=new RunFrameworkConfigReader();
   @Test
   public void userNameAvailability() throws InterruptedException {
 	  reg.enterusername("pavnish123");
@@ -32,10 +35,9 @@ public class TestSignUpPage {
 	  System.out.println("test complete");
   }
   @BeforeTest
-  public void beforeTest() {
-	  driver=new FirefoxDriver();
-	  driver.manage().window().maximize();
-	  driver.get("https://www.irctc.co.in");
+  public void beforeTest() throws IOException {
+	  readprop.RunFrameworkConfigReadermethod();
+	  driver=readprop.getBrowser();
 	  driver.findElement(By.xpath(".//a[text()='Sign up']")).click();
 	  driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 	  reg=new SignUpPage(driver);
