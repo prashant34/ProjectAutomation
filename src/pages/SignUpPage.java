@@ -44,7 +44,7 @@ public class SignUpPage {
 	By submit=By.xpath(".//a[@id='userRegistrationForm:j_idt486']");
 	By pass=By.xpath(".//input[@id='userRegistrationForm:password']");
 	By Cpass=By.xpath(".//input[@id='userRegistrationForm:confpasword']");
-	By TEST=By.xpath(".//input[@id='userRegistrationForm:confpasword']");
+	
 public void selectdropdown(By locator,String value)
 {
 	WebElement element1 = driver.findElement(locator);
